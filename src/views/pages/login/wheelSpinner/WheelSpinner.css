@@ -1,0 +1,110 @@
+.circleContainer {
+    position: relative;
+  }
+  
+  
+  .circle {
+    width: 30em;
+    height: 30em;
+    border: 1px solid black;
+    position: relative;
+    padding: 0;
+    margin: 1em auto;
+    border-radius: 50%;
+    list-style: none;
+    overflow: hidden;
+    transform: rotate(-6.923076923deg);
+    /* transition: transform 0.5s ease; */
+  }
+  li {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    transform-origin: 0% 100%;
+  }
+  
+  .text {
+    height: 50%;
+    width: 20%;
+    position: absolute;
+    text-align: center;
+    display: block;
+    /* transform:rotate(90deg); */
+    padding-top: 120px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .overlappingDiv {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 200px solid rgb(48, 104, 125); /* Adjust the height to control the triangle size */
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Ensure the overlapping div is on top */
+  }
+  .colorChecker {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Ensure the overlapping div is on top */
+  }
+  
+  .spin-button {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+  
+  /* .start-rotate {
+    animation: start-rotate 1s linear ;
+  }
+  
+  @keyframes start-rotate {
+    100% {
+      transform: rotate(90deg);
+    }
+  } */
+  
+  /* .stop-rotate {
+    animation-play-state: paused;
+  } */
+  
+  .start-rotate {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    transition: transform 0.5s ease; /* Add a smooth transition effect */
+  }
+  
+  .rotated {
+    transform: rotate(-13.846deg);
+  }
+  
+  
+  @media (max-width: 1200px) {
+    .text {
+      font-size: 20px; /* Adjust as needed */
+      padding-top: 75px;
+    }
+    .circle {
+      width: 20em;
+      height: 20em;
+    }
+    .overlappingDiv {
+     
+      border-bottom: 175px solid rgb(48, 104, 125); /* Adjust the height to control the triangle size */
+    }
+  }
+  
