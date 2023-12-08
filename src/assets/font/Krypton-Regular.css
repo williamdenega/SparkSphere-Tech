@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Krypton';
+    src: local('Krypton'), url('./MonaspaceKrypton-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: 'MonaspaceKryptonVarVF', 'Roboto', sans-serif;
+    /* font-feature-settings: 'liga' 'calt' on; */
+    font-feature-settings: 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' on;
+  }

@@ -1,7 +1,9 @@
 import LAYOUT_CONST from 'constant';
+import './assets/font/Krypton-Regular.css';
 
 // basename: only at build time to set, and Don't add '/' at end off BASENAME for breadcrumbs, also Don't put only '/' use blank('') instead,
 // like '/berry-material-react/react/default'
+
 export const BASE_PATH = '';
 
 export const DASHBOARD_PATH = '/sample-page';
@@ -10,7 +12,7 @@ export const HORIZONTAL_MAX_ITEM = 7;
 const config = {
     layout: LAYOUT_CONST.VERTICAL_LAYOUT, // vertical, horizontal
     drawerType: LAYOUT_CONST.DEFAULT_DRAWER, // default, mini-drawer
-    fontFamily: `'Roboto', sans-serif`,
+    fontFamily: `'Krypton','Roboto', sans-serif`,
     borderRadius: 8,
     outlinedFilled: true,
     navType: 'light', // light, dark

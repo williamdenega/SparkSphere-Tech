@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './WheelSpinner.css';
 import { Button, DialogActions } from '@mui/material';
 import CasinoIcon from '@mui/icons-material/Casino';
 import { gridSpacing } from 'store/constant';
 import BackspaceIcon from '@mui/icons-material/Backspace';
-export default function RealWheel({ setName, name, setChar, char }) {
+export default function RealWheel({ setInput, input, spinning, setSpinning }) {
     const letters = [
         'a',
         'b',
@@ -65,10 +65,11 @@ export default function RealWheel({ setName, name, setChar, char }) {
     //const [name, setName] = useState("circle");
     //const [current, setCurrent] = useState('');
     let totalRotation = -6.923076923;
-    const [rotating, setRotating] = useState(false);
+    //const [rotating, setRotating] = useState(false);
     const startRotation = async () => {
         const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
-        setRotating(true);
+        //setRotating(true);
+        setSpinning(true);
         // Create a promise that resolves after the rotations are done
         const rotationsPromise = () =>
             new Promise((resolve) => {
@@ -77,10 +78,10 @@ export default function RealWheel({ setName, name, setChar, char }) {
                         (index) => {
                             // console.log(randomCount - index);
                             const letterIndex = letters.length - (index % letters.length) - 1;
-                            const letter = letters[letterIndex];
-                            setChar(letter);
+                            //const letter = letters[letterIndex];
+                            //setChar(letter);
                             rotateOnClick();
-                            setName(() => name + letters[letterIndex]);
+                            setInput(() => input + letters[letterIndex]);
                             // setName(letter);
                             //console.log(letter);
                             // console.log(letter);
@@ -99,17 +100,18 @@ export default function RealWheel({ setName, name, setChar, char }) {
 
         // Wait for the promise to resolve before logging 'hello'
         await rotationsPromise();
-        setRotating(false);
+        //setRotating(false);
+        setSpinning(false);
         //setName((prevName) => prevName + char);
         //console.log(char + 'HEREERE');
         //console.log(name + 'current name');
     };
 
     function handleBack() {
-        console.log(char);
-        console.log(name);
-        console.log(name.slice(0, -1) + 'DELETED NAME');
-        setName(name.slice(0, -1));
+        //console.log(char);
+        //console.log(name);
+        //console.log(name.slice(0, -1) + 'DELETED NAME');
+        setInput(input.slice(0, -1));
     }
 
     function rotateOnClick() {
@@ -149,7 +151,7 @@ export default function RealWheel({ setName, name, setChar, char }) {
                     size="large"
                     variant="outlined"
                     color="primary"
-                    disabled={rotating}
+                    disabled={spinning || input.length == 0}
                     endIcon={<BackspaceIcon />}
                     onClick={handleBack}
                 >
@@ -158,7 +160,7 @@ export default function RealWheel({ setName, name, setChar, char }) {
                 <Button
                     size="large"
                     variant="outlined"
-                    disabled={rotating}
+                    disabled={spinning}
                     color="primary"
                     endIcon={<CasinoIcon />}
                     value={50}

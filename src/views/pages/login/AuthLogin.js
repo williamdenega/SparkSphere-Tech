@@ -38,9 +38,8 @@ import { gridSpacing } from 'store/constant';
 // assets
 import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
-//import Visibility from '@mui/icons-material/Visibility';
-//import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import WheelSpinner from './wheelSpinner/WheelSpinner';
+import UserDialog from './components/UserDialog';
+import WheelSpinner from './components/wheelSpinner/WheelSpinner';
 import LoginIcon from '@mui/icons-material/Login';
 import CloseIcon from '@mui/icons-material/Close';
 //import CasinoIcon from '@mui/icons-material/Casino';
@@ -51,8 +50,7 @@ const JWTLogin = ({ loginProp }) => {
     const [openDialog, setOpenDialog] = useState(false);
     const [openPassword, setOpenPassword] = useState(false);
     const [name, setName] = useState('');
-    //const [password, setPassword] = useState('');
-    const [char, setChar] = useState('');
+    const [password, setPassword] = useState('');
     const { login } = useAuth();
     const scriptedRef = useScriptRef();
     const [checked, setChecked] = React.useState(true);
@@ -71,9 +69,9 @@ const JWTLogin = ({ loginProp }) => {
     // }
 
     const handleUserCancel = () => {
-        setOpenDialog(false)
-        setName('')
-    }
+        setOpenDialog(false);
+        setName('');
+    };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -116,7 +114,7 @@ const JWTLogin = ({ loginProp }) => {
                     <form noValidate onSubmit={handleSubmit}>
                         {/* Email input */}
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Click on the Person to Enter UserName --&gt;</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Press the Person to Enter UserName -&gt;</InputLabel>
 
                             <OutlinedInput
                                 id="outlined-adornment-email-login"
@@ -152,11 +150,11 @@ const JWTLogin = ({ loginProp }) => {
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Click on the Lock to Enter Password --&gt;</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-password-login">Press the Lock to Enter Password -&gt;</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password-login"
                                 type="password"
-                                value={name}
+                                value={password}
                                 disabled
                                 name="password"
                                 onBlur={handleBlur}
@@ -227,50 +225,10 @@ const JWTLogin = ({ loginProp }) => {
                                 </Button>
                             </AnimateButton>
                         </Box>
-                        <Dialog
-                            open={openDialog}
-                            onClose={() => setOpenDialog(false)}
-                            setName={setName}
-                            name={name}
-                            char={char}
-                            setChar={setChar}
-                        >
-                            <DialogTitle>ENTER YOUR USERNAME</DialogTitle>
-                            <DialogContent
-                                style={{
-                                    height: '600px',
-                                    overflow: 'hidden',
-                                    margin: '10px'
-                                }}
-                            >
-                                <TextField
-                                    margin="dense"
-                                    id="name"
-                                    label="USERNAME"
-                                    type="text"
-                                    value={name}
-                                    fullWidth
-                                    variant="standard"
-                                />
-                                <WheelSpinner setName={setName} name={name} char={char} setChar={setChar} />
-                            </DialogContent>
-                            <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center', spacing: { gridSpacing } }}>
-                                <Button size="large" variant="contained" onClick={handleUserCancel} endIcon={<CloseIcon />}>
-                                    Cancel
-                                </Button>
-                                <Button size="large" variant="contained" onClick={() => setOpenDialog(false)} endIcon={<LoginIcon />}>
-                                    Continue
-                                </Button>
-                            </DialogActions>
+                        <Dialog open={openDialog} onClose={() => setOpenDialog(false)} setName={setName} name={name}>
+                            <UserDialog handleUserCancel={handleUserCancel} setOpenDialog={setOpenDialog} setName={setName} input={name}/>
                         </Dialog>
-                        <Dialog
-                            open={openPassword}
-                            onClose={() => setOpenPassword(false)}
-                            setName={setName}
-                            name={name}
-                            char={char}
-                            setChar={setChar}
-                        >
+                        <Dialog open={openPassword} onClose={() => setOpenPassword(false)} setPassword={setPassword} password={password}>
                             <DialogTitle>ENTER YOUR PASSWORD</DialogTitle>
                             <DialogContent
                                 style={{
@@ -284,11 +242,11 @@ const JWTLogin = ({ loginProp }) => {
                                     id="password"
                                     label="PASSWORD"
                                     type="text"
-                                    value={name}
+                                    value={password}
                                     fullWidth
                                     variant="standard"
                                 />
-                                <WheelSpinner setName={setName} name={name} char={char} setChar={setChar} />
+                                <WheelSpinner setInput={setPassword} input={password} />
                             </DialogContent>
                             <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center', spacing: { gridSpacing } }}>
                                 <Button size="large" variant="contained" onClick={() => setOpenPassword(false)} endIcon={<CloseIcon />}>

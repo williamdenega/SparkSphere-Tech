@@ -12,7 +12,7 @@ import Logo from 'ui-component/Logo';
 import BackgroundPattern2 from 'ui-component/cards/BackgroundPattern2';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 import AuthSlider from 'ui-component/cards/AuthSlider';
-import WheelSpinner from './wheelSpinner/WheelSpinner';
+import WheelSpinner from './components/wheelSpinner/WheelSpinner';
 
 // assets
 // import imgMain from 'assets/images/auth/img-a2-login.svg';
