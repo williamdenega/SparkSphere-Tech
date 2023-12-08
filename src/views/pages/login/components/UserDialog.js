@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
 import { gridSpacing } from 'store/constant';
 
@@ -8,8 +8,7 @@ import LoginIcon from '@mui/icons-material/Login';
 //import CloseIcon from '@mui/icons-material/Close';
 
 export default function UserDialog({ setOpenDialog, setName, input }) {
-
-    const [spinning, setSpinning ] = useState(false)
+    const [spinning, setSpinning] = useState(false);
 
     return (
         <>
@@ -28,7 +27,14 @@ export default function UserDialog({ setOpenDialog, setName, input }) {
                 {/* <Button size="large" disabled={spinning} variant="contained" onClick={handleUserCancel} endIcon={<CloseIcon />}>
                     Delete Input
                 </Button> */}
-                <Button size="large" disabled={spinning} variant="contained" fullWidth onClick={() => setOpenDialog(false)} endIcon={<LoginIcon />}>
+                <Button
+                    size="large"
+                    disabled={spinning}
+                    variant="contained"
+                    fullWidth
+                    onClick={() => setOpenDialog(false)}
+                    endIcon={<LoginIcon />}
+                >
                     Continue
                 </Button>
             </DialogActions>
