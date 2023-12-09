@@ -40,14 +40,13 @@ const Login = () => {
                                     <Grid item xs={12}>
                                         <Grid
                                             container
-                                            direction={matchDownSM ? 'column-reverse' : 'row'}
+                                            direction={matchDownSM ? 'column' : 'row'}
                                             alignItems="center"
                                             justifyContent="center"
                                         >
                                             <Grid item>
                                                 <Stack alignItems="center" justifyContent="center" spacing={1}>
                                                     <Typography
-                                                        
                                                         variant="overline"
                                                         fontSize="16px"
                                                         textAlign={matchDownSM ? 'center' : 'inherit'}
@@ -56,7 +55,7 @@ const Login = () => {
                                                     </Typography>
                                                 </Stack>
                                             </Grid>
-                                            <Grid item xs={12}>
+                                            <Grid item>
                                                 <Grid container direction={'row'} alignItems="flex-end" justifyContent="flex-end">
                                                     <Grid item>
                                                         <Typography variant="caption" fontSize="14px" style={{ textAlign: 'right' }}>
