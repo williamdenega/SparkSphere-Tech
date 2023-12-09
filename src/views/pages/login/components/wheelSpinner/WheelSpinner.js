@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './WheelSpinner.css';
-import { Button, DialogActions } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
 import CasinoIcon from '@mui/icons-material/Casino';
 import { gridSpacing } from 'store/constant';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 let totalRotation = -6.923076923;
 let currentIndex = 0;
-export default function RealWheel({ setInput, input, spinning, setSpinning, open }) {
+export default function RealWheel({ setInput, input, spinning, setSpinning, open, setSpins, spins }) {
     const letters = [
         'a',
         'b',
@@ -64,119 +64,67 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
         '#815CD1'
     ];
 
-    //const [name, setName] = useState("circle");
-    //const [current, setCurrent] = useState('');
-    //let totalRotation = -6.923076923;
-    //const [rotating, setRotating] = useState(false);
-    // const startRotation = async () => {
-    //     const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
-    //     // setRotating(true);
-    //     setSpinning(true);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    //     // Create a promise that resolves after the rotations are done
-    //     const rotationsPromise = () =>
-    //         new Promise((resolve) => {
-    //             const performRotation = async (index) => {
-    //                 console.log(randomCount);
-    //                 await new Promise((innerResolve) => setTimeout(innerResolve, index * 70));
-
-    //                 const letterIndex = letters.length - (index % letters.length) - 1;
-    //                 rotateOnClick();
-    //                 setInput((prevInput) => prevInput + letters[letterIndex]);
-
-    //                 // Resolve the promise after the last rotation
-    //                 if (randomCount - index === 0) {
-    //                     resolve();
-    //                 }
-    //             };
-
-    //             // Perform rotations asynchronously
-    //             for (let i = 0; i <= randomCount; i++) {
-
-    //                 performRotation(i);
-    //             }
-    //         });
-
-    //     // Wait for the promise to resolve before continuing
-    //     await rotationsPromise();
-
-    //     // setRotating(false);
-    //     setSpinning(false);
-    //     // setName((prevName) => prevName + char);
-    //     // console.log(char + 'HEREERE');
-    //     // console.log(name + 'current name');
-    // };
-    // const startRotation = () => {
-    //     const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
-    //     setSpinning(true);
-    //     for (let i = 0; i <= randomCount; i++) {
-    //         console.log(randomCount);
-    //         setTimeout(
-    //             (index) => {
-    //                 const letterIndex = letters.length - (index % letters.length) - 1;
-    //                 rotateOnClick();
-    //                 setInput(() => input + letters[letterIndex]);
-
-    //                 if (randomCount - index === 0) {
-    //                     setSpinning(false);
-    //                 }
-    //             },
-    //             i * 70,
-    //             i
-    //         );
+    // useEffect(() => {
+    //     if (spins == 0 && spinning == false) {
+    //         // Run your code when spins is 0
+    //         //console.log('Spins is 0!');
+    //         // Open the dialog
+    //         setTimeout(() => {
+    //             setIsDialogOpen(true);
+    //         }, 500);
     //     }
-    // };
-
-    const startRotation = async () => {
+    // }, [spins, spinning]);
+    console.log();
+    const startRotation = () => {
         const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
-        //setRotating(true);
         setSpinning(true);
-        // Create a promise that resolves after the rotations are done
-        const rotationsPromise = () =>
-            new Promise((resolve) => {
-                for (let i = 0; i <= randomCount; i++) {
-                    //console.log(randomCount);
-                    setTimeout(
-                        (index) => {
-                            // console.log(randomCount - index);
-                            //let number = index + currentIndex;
+        setSpins((prevSpins) => prevSpins - 1);
+        console.log();
+        for (let i = 0; i <= randomCount; i++) {
+            //console.log(randomCount);
+            setTimeout(
+                (index) => {
+                    // console.log(randomCount - index);
+                    //let number = index + currentIndex;
 
-                            //console.log(currentIndex);
+                    //console.log(currentIndex);
 
-                            const letterIndex = letters.length - ((index + (letters.length - currentIndex)) % letters.length) - 1;
-                            //                  26      -     15    -             15     //
+                    const letterIndex = letters.length - ((index + (letters.length - currentIndex)) % letters.length) - 1;
+                    //                  26      -     15    -             15     //
 
-                            //console.log(letterIndex )
-                            //const letter = letters[letterIndex];
-                            //setChar(letter);
-                            rotateOnClick();
-                            setInput(() => input + letters[letterIndex]);
-                            // setName(letter);
-                            //console.log(letter);
-                            // console.log(letter);
-                            //console.log(letter + ' letter 1');
-                            //console.log(char + ' letter 2');
-                            // Resolve the promise after the last rotation
-                            if (randomCount - index === 0) {
-                                currentIndex = letterIndex;
-                                console.log(currentIndex);
-                                resolve();
-                                setSpinning(false);
-                            }
-                        },
-                        i * 60,
-                        i
-                    ); // Pass the value of i as an argument to the setTimeout callback
-                }
-            });
+                    //console.log(letterIndex )
+                    //const letter = letters[letterIndex];
+                    //setChar(letter);
+                    rotateOnClick();
+                    setInput(() => input + letters[letterIndex]);
+                    // setName(letter);
+                    //console.log(letter);
+                    // console.log(letter);
+                    //console.log(letter + ' letter 1');
+                    //console.log(char + ' letter 2');
+                    // Resolve the promise after the last rotation
+                    if (randomCount - index === 0) {
+                        currentIndex = letterIndex;
+                        //console.log(currentIndex);
+                        // resolve();
+                        setSpinning(false);
+                    }
+                },
+                i * 60,
+                i
+            ); // Pass the value of i as an argument to the setTimeout callback
+        }
+    };
 
-        // Wait for the promise to resolve before logging 'hello'
-        await rotationsPromise();
-        //setRotating(false);
-
-        //setName((prevName) => prevName + char);
-        //console.log(char + 'HEREERE');
-        //console.log(name + 'current name');
+    const handleClick = () => {
+        if (spins === 0) {
+            // Show the dialog if there are no spins left
+            setIsDialogOpen(true);
+            return;
+        }
+        startRotation();
     };
 
     function handleBack() {
@@ -198,6 +146,10 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
         element.style.transform = `rotate(${totalRotation}deg)`;
     }
 
+    const handleCloseDialog = () => {
+        // Close the dialog
+        setIsDialogOpen(false);
+    };
     const rotationDegree = 360 / letters.length;
     // each letter is about 13.846
 
@@ -230,7 +182,7 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
                     variant="outlined"
                     color="primary"
                     disabled={spinning || input.length == 0}
-                    endIcon={<BackspaceIcon />}
+                    startIcon={<BackspaceIcon />}
                     onClick={handleBack}
                 >
                     BACK
@@ -239,14 +191,38 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
                     size="large"
                     variant="outlined"
                     disabled={spinning}
-                    color="primary"
+                    color={spins === 0 ? 'primary' : 'primary'}
                     endIcon={<CasinoIcon />}
                     value={50}
-                    onClick={startRotation}
+                    onClick={handleClick}
+                    style={{
+                        opacity: spins === 0 && spinning == false ? 0.3 : 1 // Adjust opacity based on spins
+                    }}
                 >
                     SPIN
                 </Button>
             </DialogActions>
+            <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
+                <DialogTitle style={{ textAlign: 'center' }}>
+                    <Typography variant="h2">No Spins Left!</Typography>
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText marginBottom={2}>
+                        You have used all your spins. Get more spins to continue logging in.
+                    </DialogContentText>
+                    <DialogContentText style={{ textAlign: 'center' }}>
+                        <Typography variant="h4">Get unlimited spins for only $1.99!</Typography>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center', spacing: { gridSpacing } }}>
+                    <Button onClick={handleCloseDialog} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={handleCloseDialog} color="primary">
+                        $1.99
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }

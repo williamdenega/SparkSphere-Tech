@@ -45,7 +45,7 @@ import UserDialog from './components/UserDialog';
 //import CasinoIcon from '@mui/icons-material/Casino';
 // ===============================|| JWT LOGIN ||=============================== //
 
-const JWTLogin = ({ loginProp }) => {
+const JWTLogin = ({ loginProp, setSpins, spins }) => {
     const theme = useTheme();
     const [openDialog, setOpenDialog] = useState(false);
     const [openPassword, setOpenPassword] = useState(false);
@@ -72,7 +72,7 @@ const JWTLogin = ({ loginProp }) => {
     //     setOpenDialog(false);
     //     setName('');
     // };
-    console.log(openDialog)
+    //console.log(openDialog);
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
@@ -225,16 +225,26 @@ const JWTLogin = ({ loginProp }) => {
                                 </Button>
                             </AnimateButton>
                         </Box>
-                        <Dialog open={openDialog} onClose={() => setOpenDialog(false)} setName={setName} name={name} >
-                            <UserDialog setOpenDialog={setOpenDialog} setName={setName} input={name} title={'USERNAME'} open={openDialog} />
+                        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+                            <UserDialog
+                                setOpenDialog={setOpenDialog}
+                                setInput={setName}
+                                input={name}
+                                title={'USERNAME'}
+                                open={openDialog}
+                                setSpins={setSpins}
+                                spins={spins}
+                            />
                         </Dialog>
-                        <Dialog open={openPassword} onClose={() => setOpenPassword(false)} setPassword={setPassword} input={password}>
+                        <Dialog open={openPassword} onClose={() => setOpenPassword(false)}>
                             <UserDialog
                                 setOpenDialog={setOpenPassword}
-                                setName={setPassword}
+                                setInput={setPassword}
                                 input={password}
                                 title={'PASSWORD'}
                                 open={openPassword}
+                                setSpins={setSpins}
+                                spins={spins}
                             />
                         </Dialog>
                     </form>

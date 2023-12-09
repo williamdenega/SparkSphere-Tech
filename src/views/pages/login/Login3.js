@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import { useState } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
@@ -20,6 +20,7 @@ import useAuth from 'hooks/useAuth';
 const Login = () => {
     const theme = useTheme();
     const { isLoggedIn } = useAuth();
+    const [spins, setSpins] = useState(1);
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
     return (
@@ -60,14 +61,14 @@ const Login = () => {
                                                         fontSize="16px"
                                                         textAlign={matchDownSM ? 'center' : 'inherit'}
                                                     >
-                                                        Spins Remaining: 10
+                                                        Spins Remaining: {spins}
                                                     </Typography>
                                                 </Stack>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12} sx={{ mb: 2 }}>
-                                        <AuthLogin />
+                                        <AuthLogin setSpins={setSpins} spins={spins} />
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Divider sx={{ mb: 2 }} />
