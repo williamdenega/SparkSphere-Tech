@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './WheelSpinner.css';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
 import CasinoIcon from '@mui/icons-material/Casino';
 import { gridSpacing } from 'store/constant';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import PropTypes from 'prop-types';
 let totalRotation = -6.923076923;
 let currentIndex = 0;
-export default function RealWheel({ setInput, input, spinning, setSpinning, open, setSpins, spins }) {
+export default function RealWheel({ setInput, input, spinning, setSpinning, open, setSpins, spins, handleAnimate }) {
     const letters = [
         'a',
         'b',
@@ -65,7 +66,11 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
     ];
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+    useEffect(() => {
+        const element = document.querySelector('.circle');
+        element.style.transition = '';
+        element.style.transform = `rotate(${totalRotation}deg)`;
+    }, []);
     // useEffect(() => {
     //     if (spins == 0 && spinning == false) {
     //         // Run your code when spins is 0
@@ -80,8 +85,14 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
     const startRotation = () => {
         const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
         setSpinning(true);
-        setSpins((prevSpins) => prevSpins - 1);
-        console.log();
+        console.log('THERE ');
+        //console.log('TEST HERER');
+        // setClicked(false);
+        setTimeout(() => {
+            setSpins((prevSpins) => prevSpins - 1);
+        }, 1000);
+
+        //console.log();
         for (let i = 0; i <= randomCount; i++) {
             //console.log(randomCount);
             setTimeout(
@@ -124,7 +135,10 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
             setIsDialogOpen(true);
             return;
         }
+        //console.log('clicked once');
         startRotation();
+        handleAnimate();
+        console.log('HERE ');
     };
 
     function handleBack() {
@@ -136,15 +150,27 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
 
     function rotateOnClick() {
         if (!open) {
-            //totalRotation += 180 / 13; // Increase the rotation angle by 90 degrees on each click
-            //element.style.transform = `rotate(${-6.923076923}deg)`;
             return;
         }
-        var element = document.querySelector('.circle');
 
-        totalRotation += 180 / 13; // Increase the rotation angle by 90 degrees on each click
-        element.style.transform = `rotate(${totalRotation}deg)`;
+        const element = document.querySelector('.circle');
+
+        if (element) {
+            totalRotation += 180 / 13; // Increase the rotation angle by 90 degrees on each click
+            element.style.transform = `rotate(${totalRotation}deg)`;
+            element.style.transition = 'transform .4s ease';
+        } else {
+            console.error('Element with class "circle" not found.');
+            totalRotation += 180 / 13;
+            return;
+        }
     }
+
+    const handleRickRoll = () => {
+        // Redirect to the Rick Roll video
+        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        handleCloseDialog();
+    };
 
     const handleCloseDialog = () => {
         // Close the dialog
@@ -207,9 +233,9 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
                     <Typography variant="h2">No Spins Left!</Typography>
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText marginBottom={2}>
-                        You have used all your spins. Get more spins to continue logging in.
-                    </DialogContentText>
+                    {/* <DialogContentText marginBottom={2} style={{ textAlign: 'center' }}>
+                        <Typography variant="h4">You have used all your spins.</Typography>
+                    </DialogContentText> */}
                     <DialogContentText style={{ textAlign: 'center' }}>
                         <Typography variant="h4">Get unlimited spins for only $1.99!</Typography>
                     </DialogContentText>
@@ -218,7 +244,7 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
                     <Button onClick={handleCloseDialog} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={handleCloseDialog} color="primary">
+                    <Button onClick={handleRickRoll} color="primary">
                         $1.99
                     </Button>
                 </DialogActions>
@@ -226,3 +252,14 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
         </>
     );
 }
+
+RealWheel.propTypes = {
+    setInput: PropTypes.func.isRequired,
+    input: PropTypes.string.isRequired,
+    spinning: PropTypes.bool.isRequired,
+    setSpinning: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    setSpins: PropTypes.func.isRequired,
+    spins: PropTypes.number.isRequired,
+    handleAnimate: PropTypes.func.isRequired
+};

@@ -13,8 +13,8 @@
     border-radius: 50%;
     list-style: none;
     overflow: hidden;
-    transform: rotate(-6.923076923deg);
-    transition: transform 0.5s ease;
+    /* transform: rotate(-6.923076923deg); */
+    /* transition: transform 1s ease; */
   }
   li {
     overflow: hidden;

@@ -14,13 +14,14 @@ import useAuth from 'hooks/useAuth';
 // import WheelSpinner from './wheelSpinner/WheelSpinner';
 
 // assets
+// import LoginIcon from '@mui/icons-material/Login';
 
 // ================================|| AUTH3 - LOGIN ||================================ //
 
 const Login = () => {
     const theme = useTheme();
     const { isLoggedIn } = useAuth();
-    const [spins, setSpins] = useState(1);
+    const [spins, setSpins] = useState(10);
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
     return (
@@ -46,7 +47,8 @@ const Login = () => {
                                             <Grid item>
                                                 <Stack alignItems="center" justifyContent="center" spacing={1}>
                                                     <Typography
-                                                        variant="caption"
+                                                        
+                                                        variant="overline"
                                                         fontSize="16px"
                                                         textAlign={matchDownSM ? 'center' : 'inherit'}
                                                     >
@@ -55,6 +57,24 @@ const Login = () => {
                                                 </Stack>
                                             </Grid>
                                             <Grid item xs={12}>
+                                                <Grid container direction={'row'} alignItems="flex-end" justifyContent="flex-end">
+                                                    <Grid item>
+                                                        <Typography variant="caption" fontSize="14px" style={{ textAlign: 'right' }}>
+                                                            Spins Remaining:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item ml={1}>
+                                                        <Typography
+                                                            variant="caption"
+                                                            fontSize="14px"
+                                                            style={{ color: spins <= 3 ? 'red' : 'inherit', textAlign: 'right' }}
+                                                        >
+                                                            {spins}
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                            {/* <Grid item xs={12}>
                                                 <Stack alignItems="center" justifyContent="center" spacing={1}>
                                                     <Typography
                                                         variant="overline"
@@ -63,8 +83,15 @@ const Login = () => {
                                                     >
                                                         Spins Remaining: {spins}
                                                     </Typography>
+                                                    <Typography
+                                                        variant="overline"
+                                                        fontSize="16px"
+                                                        textAlign={matchDownSM ? 'center' : 'inherit'}
+                                                    >
+                                                        {spins}
+                                                    </Typography>
                                                 </Stack>
-                                            </Grid>
+                                            </Grid> */}
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12} sx={{ mb: 2 }}>

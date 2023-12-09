@@ -39,6 +39,8 @@ import useScriptRef from 'hooks/useScriptRef';
 import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
 import UserDialog from './components/UserDialog';
+import LoginIcon from '@mui/icons-material/Login';
+
 //import WheelSpinner from './components/wheelSpinner/WheelSpinner';
 //import LoginIcon from '@mui/icons-material/Login';
 //import CloseIcon from '@mui/icons-material/Close';
@@ -220,7 +222,15 @@ const JWTLogin = ({ loginProp, setSpins, spins }) => {
                         )}
                         <Box sx={{ mt: 2 }}>
                             <AnimateButton>
-                                <Button color="secondary" disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained">
+                                <Button
+                                    color="secondary"
+                                    disabled={isSubmitting}
+                                    fullWidth
+                                    size="large"
+                                    type="submit"
+                                    variant="contained"
+                                    endIcon={<LoginIcon />}
+                                >
                                     Sign In
                                 </Button>
                             </AnimateButton>
