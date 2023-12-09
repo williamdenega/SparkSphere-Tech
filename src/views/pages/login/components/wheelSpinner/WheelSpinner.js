@@ -4,7 +4,9 @@ import { Button, DialogActions } from '@mui/material';
 import CasinoIcon from '@mui/icons-material/Casino';
 import { gridSpacing } from 'store/constant';
 import BackspaceIcon from '@mui/icons-material/Backspace';
-export default function RealWheel({ setInput, input, spinning, setSpinning }) {
+let totalRotation = -6.923076923;
+let currentIndex = 0;
+export default function RealWheel({ setInput, input, spinning, setSpinning, open }) {
     const letters = [
         'a',
         'b',
@@ -64,8 +66,67 @@ export default function RealWheel({ setInput, input, spinning, setSpinning }) {
 
     //const [name, setName] = useState("circle");
     //const [current, setCurrent] = useState('');
-    let totalRotation = -6.923076923;
+    //let totalRotation = -6.923076923;
     //const [rotating, setRotating] = useState(false);
+    // const startRotation = async () => {
+    //     const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
+    //     // setRotating(true);
+    //     setSpinning(true);
+
+    //     // Create a promise that resolves after the rotations are done
+    //     const rotationsPromise = () =>
+    //         new Promise((resolve) => {
+    //             const performRotation = async (index) => {
+    //                 console.log(randomCount);
+    //                 await new Promise((innerResolve) => setTimeout(innerResolve, index * 70));
+
+    //                 const letterIndex = letters.length - (index % letters.length) - 1;
+    //                 rotateOnClick();
+    //                 setInput((prevInput) => prevInput + letters[letterIndex]);
+
+    //                 // Resolve the promise after the last rotation
+    //                 if (randomCount - index === 0) {
+    //                     resolve();
+    //                 }
+    //             };
+
+    //             // Perform rotations asynchronously
+    //             for (let i = 0; i <= randomCount; i++) {
+
+    //                 performRotation(i);
+    //             }
+    //         });
+
+    //     // Wait for the promise to resolve before continuing
+    //     await rotationsPromise();
+
+    //     // setRotating(false);
+    //     setSpinning(false);
+    //     // setName((prevName) => prevName + char);
+    //     // console.log(char + 'HEREERE');
+    //     // console.log(name + 'current name');
+    // };
+    // const startRotation = () => {
+    //     const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
+    //     setSpinning(true);
+    //     for (let i = 0; i <= randomCount; i++) {
+    //         console.log(randomCount);
+    //         setTimeout(
+    //             (index) => {
+    //                 const letterIndex = letters.length - (index % letters.length) - 1;
+    //                 rotateOnClick();
+    //                 setInput(() => input + letters[letterIndex]);
+
+    //                 if (randomCount - index === 0) {
+    //                     setSpinning(false);
+    //                 }
+    //             },
+    //             i * 70,
+    //             i
+    //         );
+    //     }
+    // };
+
     const startRotation = async () => {
         const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
         //setRotating(true);
@@ -74,10 +135,18 @@ export default function RealWheel({ setInput, input, spinning, setSpinning }) {
         const rotationsPromise = () =>
             new Promise((resolve) => {
                 for (let i = 0; i <= randomCount; i++) {
+                    //console.log(randomCount);
                     setTimeout(
                         (index) => {
                             // console.log(randomCount - index);
-                            const letterIndex = letters.length - (index % letters.length) - 1;
+                            //let number = index + currentIndex;
+
+                            //console.log(currentIndex);
+
+                            const letterIndex = letters.length - ((index + (letters.length - currentIndex)) % letters.length) - 1;
+                            //                  26      -     15    -             15     //
+
+                            //console.log(letterIndex )
                             //const letter = letters[letterIndex];
                             //setChar(letter);
                             rotateOnClick();
@@ -89,7 +158,10 @@ export default function RealWheel({ setInput, input, spinning, setSpinning }) {
                             //console.log(char + ' letter 2');
                             // Resolve the promise after the last rotation
                             if (randomCount - index === 0) {
+                                currentIndex = letterIndex;
+                                console.log(currentIndex);
                                 resolve();
+                                setSpinning(false);
                             }
                         },
                         i * 60,
@@ -101,7 +173,7 @@ export default function RealWheel({ setInput, input, spinning, setSpinning }) {
         // Wait for the promise to resolve before logging 'hello'
         await rotationsPromise();
         //setRotating(false);
-        setSpinning(false);
+
         //setName((prevName) => prevName + char);
         //console.log(char + 'HEREERE');
         //console.log(name + 'current name');
@@ -115,7 +187,13 @@ export default function RealWheel({ setInput, input, spinning, setSpinning }) {
     }
 
     function rotateOnClick() {
+        if (!open) {
+            //totalRotation += 180 / 13; // Increase the rotation angle by 90 degrees on each click
+            //element.style.transform = `rotate(${-6.923076923}deg)`;
+            return;
+        }
         var element = document.querySelector('.circle');
+
         totalRotation += 180 / 13; // Increase the rotation angle by 90 degrees on each click
         element.style.transform = `rotate(${totalRotation}deg)`;
     }

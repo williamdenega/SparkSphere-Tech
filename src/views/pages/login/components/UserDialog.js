@@ -7,12 +7,12 @@ import WheelSpinner from './wheelSpinner/WheelSpinner';
 import LoginIcon from '@mui/icons-material/Login';
 //import CloseIcon from '@mui/icons-material/Close';
 
-export default function UserDialog({ setOpenDialog, setName, input }) {
+export default function UserDialog({ setOpenDialog, setName, input, title, open }) {
     const [spinning, setSpinning] = useState(false);
 
     return (
         <>
-            <DialogTitle>ENTER YOUR USERNAME</DialogTitle>
+            <DialogTitle>ENTER YOUR {title}</DialogTitle>
             <DialogContent
                 style={{
                     height: '600px',
@@ -20,13 +20,10 @@ export default function UserDialog({ setOpenDialog, setName, input }) {
                     margin: '10px'
                 }}
             >
-                <TextField margin="dense" id="name" label="USERNAME" type="text" value={input} fullWidth variant="standard" />
-                <WheelSpinner setInput={setName} input={input} spinning={spinning} setSpinning={setSpinning} />
+                <TextField margin="dense" id="name" label={title} type="text" value={input} fullWidth variant="standard" />
+                <WheelSpinner setInput={setName} input={input} spinning={spinning} setSpinning={setSpinning} open={open}/>
             </DialogContent>
             <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center', spacing: { gridSpacing } }}>
-                {/* <Button size="large" disabled={spinning} variant="contained" onClick={handleUserCancel} endIcon={<CloseIcon />}>
-                    Delete Input
-                </Button> */}
                 <Button
                     size="large"
                     disabled={spinning}

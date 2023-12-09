@@ -53,6 +53,17 @@ const Login = () => {
                                                     </Typography>
                                                 </Stack>
                                             </Grid>
+                                            <Grid item xs={12}>
+                                                <Stack alignItems="center" justifyContent="center" spacing={1}>
+                                                    <Typography
+                                                        variant="overline"
+                                                        fontSize="16px"
+                                                        textAlign={matchDownSM ? 'center' : 'inherit'}
+                                                    >
+                                                        Spins Remaining: 10
+                                                    </Typography>
+                                                </Stack>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12} sx={{ mb: 2 }}>
