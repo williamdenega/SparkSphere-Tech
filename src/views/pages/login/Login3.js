@@ -21,7 +21,7 @@ import useAuth from 'hooks/useAuth';
 const Login = () => {
     const theme = useTheme();
     const { isLoggedIn } = useAuth();
-    const [spins, setSpins] = useState(10);
+    const [spins, setSpins] = useState(1);
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
     return (

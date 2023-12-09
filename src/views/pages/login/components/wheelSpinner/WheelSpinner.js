@@ -71,16 +71,16 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
         element.style.transition = '';
         element.style.transform = `rotate(${totalRotation}deg)`;
     }, []);
-    // useEffect(() => {
-    //     if (spins == 0 && spinning == false) {
-    //         // Run your code when spins is 0
-    //         //console.log('Spins is 0!');
-    //         // Open the dialog
-    //         setTimeout(() => {
-    //             setIsDialogOpen(true);
-    //         }, 500);
-    //     }
-    // }, [spins, spinning]);
+    useEffect(() => {
+        if (spins == 0 && spinning == false) {
+            // Run your code when spins is 0
+            //console.log('Spins is 0!');
+            // Open the dialog
+            setTimeout(() => {
+                setIsDialogOpen(true);
+            }, 200);
+        }
+    }, [spins, spinning]);
     console.log();
     const startRotation = () => {
         const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
