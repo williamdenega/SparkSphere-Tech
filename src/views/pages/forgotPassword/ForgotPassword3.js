@@ -40,12 +40,13 @@ const ForgotPassword = () => {
                                                     gutterBottom
                                                     variant={matchDownSM ? 'h3' : 'h2'}
                                                 >
-                                                    Forgot password?
+                                                    Password Recovery
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Typography variant="caption" fontSize="16px" textAlign="center">
-                                                    Wait until your Phone Number appears and hit Continue
+                                                    To initiate the password recovery process, please wait until your phone number is
+                                                    displayed.
                                                 </Typography>
                                             </Grid>
                                         </Grid>

@@ -1,7 +1,7 @@
 // material-ui
 import { Link, Typography, Stack, Box } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { IconBrandPaypalFilled } from '@tabler/icons-react';
+// import { IconBrandPaypalFilled } from '@tabler/icons-react';
 import InstagramIcon from '@mui/icons-material/Instagram';
 // ==============================|| FOOTER - AUTHENTICATION 2 & 3 ||============================== //
 
@@ -17,13 +17,12 @@ const AuthFooter = () => (
             >
                 Buy me a Coffee?
             </Typography>
-            <IconBrandPaypalFilled />
         </Box>
         <Box>
             <Typography
                 variant="subtitle2"
                 component={Link}
-                href="www.linkedin.com/in/william-denega-351954159"
+                href="https://www.linkedin.com/in/william-denega-351954159"
                 target="_blank"
                 underline="hover"
             >
