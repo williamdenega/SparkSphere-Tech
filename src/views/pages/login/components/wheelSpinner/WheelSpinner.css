@@ -6,7 +6,7 @@
   .circle {
     width: 30em;
     height: 30em;
-    border: 1px solid black;
+    border: 2px solid black;
     position: relative;
     padding: 0;
     margin: 1em auto;
@@ -46,10 +46,10 @@
     height: 0;
     border-left: 25px solid transparent;
     border-right: 25px solid transparent;
-    border-bottom: 200px solid #3f51b5; /* Updated color */
+    border-bottom: 200px solid rgb(63, 81, 181); /* Adjust the height to control the triangle size */
     transform: translate(-50%, -50%);
-    z-index: 2;
-    border-radius: 20px;
+    z-index: 2; /* Ensure the overlapping div is on top */
+    border-radius: 20px; /* Adjust the radius as needed for rounded edges */
 }
   .colorChecker {
     position: absolute;

@@ -6,7 +6,7 @@ import PauseIcon from '@mui/icons-material/Pause';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
-
+import CloseIcon from '@mui/icons-material/Close';
 const AuthForgotPassword = () => {
     const [time, setTime] = useState(0);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -121,12 +121,22 @@ const AuthForgotPassword = () => {
                 {/* Content of the dialog */}
                 {success ? (
                     <>
-                        <DialogTitle sx={{ textAlign: 'center' }}>Password Reset Initiated</DialogTitle>
-                        <DialogContent>
-                            <Typography variant="h5">Success! Please check your phone for a reset password link.</Typography>
+                        <DialogTitle sx={{ textAlign: 'center' }}>
+                            <Typography variant="h2">Success! </Typography>
+                        </DialogTitle>
+                        <DialogContent sx={{ textAlign: 'center' }}>
+                            <Typography variant="h4"> Check your phone within the next 3-7 days for a reset password link.</Typography>
+                            <Typography variant="h3" mt={2}>
+                                Need it sooner?
+                            </Typography>
                         </DialogContent>
                         <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
-                            <Button size="large" variant="contained" fullWidth onClick={handleCloseSuccess}>
+                            <Button size="large" variant="outlined" fullWidth onClick={handleCloseSuccess}>
+                                $4.99 for an instant Text
+                            </Button>
+                        </DialogActions>
+                        <DialogActions style={{ alignItems: 'center' }}>
+                            <Button size="large" variant="contained" fullWidth onClick={handleCloseSuccess} startIcon={<CloseIcon />}>
                                 Close
                             </Button>
                         </DialogActions>
@@ -134,7 +144,7 @@ const AuthForgotPassword = () => {
                 ) : (
                     <>
                         <DialogTitle>Is This Your Phone Number?</DialogTitle>
-                        <Box sx={{ textAlign: 'center', mb: 5 }}>
+                        <Box sx={{ textAlign: 'center', m: 3 }}>
                             <Typography variant="h2">{formattedNumber}</Typography>
                         </Box>
                         <DialogActions mb={2} style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>

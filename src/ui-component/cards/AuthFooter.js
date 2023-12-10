@@ -15,7 +15,7 @@ const AuthFooter = () => (
                 target="_blank"
                 underline="hover"
             >
-                Buy me a Coffee?
+                Buy me 1/4 of a Coffee?
             </Typography>
         </Box>
         <Box>
