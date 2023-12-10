@@ -1,16 +1,44 @@
 // material-ui
-import { Link, Typography, Stack } from '@mui/material';
-
+import { Link, Typography, Stack, Box } from '@mui/material';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { IconBrandPaypalFilled } from '@tabler/icons-react';
+import InstagramIcon from '@mui/icons-material/Instagram';
 // ==============================|| FOOTER - AUTHENTICATION 2 & 3 ||============================== //
 
 const AuthFooter = () => (
     <Stack direction="row" justifyContent="space-between">
-        <Typography variant="subtitle2" component={Link} href="https://berrydashboard.io" target="_blank" underline="hover">
-            berrydashboard.io
-        </Typography>
-        <Typography variant="subtitle2" component={Link} href="https://codedthemes.com" target="_blank" underline="hover">
-            &copy; codedthemes.com
-        </Typography>
+        <Box display="flex" flexDirection="row" alignItems="center">
+            <Typography
+                variant="subtitle2"
+                component={Link}
+                href="https://www.paypal.com/donate/?business=VADKX8EF29HA4&amount=1&no_recurring=1&item_name=Buy+me+a+Coffee?&currency_code=USD"
+                target="_blank"
+                underline="hover"
+            >
+                Buy me a Coffee?
+            </Typography>
+            <IconBrandPaypalFilled />
+        </Box>
+        <Box>
+            <Typography
+                variant="subtitle2"
+                component={Link}
+                href="www.linkedin.com/in/william-denega-351954159"
+                target="_blank"
+                underline="hover"
+            >
+                <LinkedInIcon />
+            </Typography>
+            <Typography
+                variant="subtitle2"
+                component={Link}
+                href="https://www.instagram.com/williamdenega/"
+                target="_blank"
+                underline="hover"
+            >
+                <InstagramIcon />
+            </Typography>
+        </Box>
     </Stack>
 );
 
