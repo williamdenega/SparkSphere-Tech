@@ -13,7 +13,7 @@ const config = {
     layout: LAYOUT_CONST.VERTICAL_LAYOUT, // vertical, horizontal
     drawerType: LAYOUT_CONST.DEFAULT_DRAWER, // default, mini-drawer
     fontFamily: `'Krypton','Roboto', sans-serif`,
-    borderRadius: 8,
+    borderRadius: 14,
     outlinedFilled: true,
     navType: 'light', // light, dark
     presetColor: 'theme6', // default, theme1, theme2, theme3, theme4, theme5, theme6
