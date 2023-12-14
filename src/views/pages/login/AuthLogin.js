@@ -43,7 +43,6 @@ const JWTLogin = ({ setSpins, spins }) => {
         }
         if (name === 'username') {
             setName(value);
-            console.log('HELLO INSIDE');
         } else if (name === 'password') {
             setPassword(value);
             setErrors({ ...errors, password: '' });
@@ -101,7 +100,6 @@ const JWTLogin = ({ setSpins, spins }) => {
 
     return (
         <form noValidate onSubmit={handleSubmit}>
-            {/* Email input */}
             <FormControl fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
                 <InputLabel htmlFor="outlined-adornment-email-login">Press the Icon to Enter UserName -&gt;</InputLabel>
 
