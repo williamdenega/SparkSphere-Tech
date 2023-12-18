@@ -44,7 +44,7 @@ const PhoneDialog = ({ phoneNumber, setPhoneNumber, setPhoneDialog }) => {
                                 variant="h2"
                                 sx={{
                                     textDecoration: index === activeStep ? 'underline' : 'none',
-                                    marginRight: '8px',
+                                    marginRight: '5px',
                                     color: index === activeStep ? theme.palette.primary.main : 'inherit'
                                 }}
                             >
@@ -52,7 +52,7 @@ const PhoneDialog = ({ phoneNumber, setPhoneNumber, setPhoneDialog }) => {
                             </Typography>
                             {index === 2 && (
                                 <Typography variant="h3" component="span">
-                                    ) -&nbsp;
+                                    )-&nbsp;
                                 </Typography>
                             )}
                             {index === 5 && (
