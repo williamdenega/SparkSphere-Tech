@@ -6,13 +6,14 @@ import {
     FormControl,
     FormHelperText,
     Grid,
-    // IconButton,
-    // InputAdornment,
+    IconButton,
+    InputAdornment,
     InputLabel,
     OutlinedInput,
     Typography,
     MenuItem,
-    Select
+    Select,
+    Dialog
 } from '@mui/material';
 
 import { useTheme } from '@mui/material/styles';
@@ -21,10 +22,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
 import PhoneIphoneOutlinedIcon from '@mui/icons-material/PhoneIphoneOutlined';
 
+import PhoneDialog from './components/PhoneDialog';
+
 const JWTLogin = () => {
     const usernameInputRef = useRef(null);
     const theme = useTheme();
+    const [phoneNumberArr, setPhoneNumberArr] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [phoneDialog, setPhoneDialog] = useState(false);
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [touched, setTouched] = useState({ username: false, password: false, phoneNumber: false });
@@ -35,10 +40,8 @@ const JWTLogin = () => {
     };
 
     useEffect(() => {
-        if (phoneNumber.length === 10 && usernameInputRef.current) {
-            usernameInputRef.current.focus();
-        }
-    }, [phoneNumber]);
+        setPhoneNumber(phoneNumberArr.join(''));
+    }, [phoneNumberArr]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -74,7 +77,7 @@ const JWTLogin = () => {
             setIsSubmitting(true);
             // Add your login logic here
             // await login(name, password);
-            throw new Error('Failed to create Account (not set up yet)');
+            throw new Error('Failed to create Account (WEAK PASSWORD)');
             // If successful, you can redirect or perform other actions
         } catch (err) {
             console.error(err);
@@ -83,14 +86,23 @@ const JWTLogin = () => {
             setPassword('');
             setName('');
             setPhoneNumber('');
+            setPhoneNumberArr([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             //setSpins(10);
         } finally {
             setIsSubmitting(false);
         }
     };
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
-    const formattedNumber = (phoneNumber) => {
-        return `${phoneNumber
+    const handlePhoneDialog = () => {
+        setPhoneDialog(true);
+        console.log(phoneDialog);
+    };
+
+    const formattedNumber = (num) => {
+        return `${num
             .toLocaleString('en-US', {
                 minimumIntegerDigits: 10,
                 useGrouping: false
@@ -100,27 +112,34 @@ const JWTLogin = () => {
 
     return (
         <form noValidate onSubmit={handleSubmit}>
-            <FormControl
-                required
-                fullWidth
-                error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-                sx={{ ...theme.typography.customInput }}
-            >
-                <InputLabel htmlFor="outlined-adornment-email-login">Enter Phone Number</InputLabel>
+            <FormControl fullWidth error={Boolean(touched.phoneNumber && errors.phoneNumber)} sx={{ ...theme.typography.customInput }}>
+                <InputLabel htmlFor="outlined-adornment-email-login">Press Phone to enter Number -&gt;</InputLabel>
 
                 <OutlinedInput
                     id="outlined-adornment-email-login"
                     type="tel"
                     value={formattedNumber(phoneNumber)}
                     name="phoneNumber"
+                    disabled
                     onBlur={handleBlur}
-                    onChange={handleChange}
-                    endAdornment={<PhoneIphoneOutlinedIcon />}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password dialog"
+                                onClick={handlePhoneDialog}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                                size="large"
+                            >
+                                <PhoneIphoneOutlinedIcon />
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
                 {touched.phoneNumber && errors.phoneNumber && <FormHelperText error>{errors.phoneNumber}</FormHelperText>}
             </FormControl>
 
-            <FormControl required fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
+            <FormControl fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
                 <InputLabel htmlFor="outlined-adornment-email-login">Enter UserName</InputLabel>
 
                 <OutlinedInput
@@ -136,9 +155,7 @@ const JWTLogin = () => {
                 />
                 {touched.username && errors.username && <FormHelperText error>{errors.username}</FormHelperText>}
             </FormControl>
-
             <FormControl
-                required
                 fullWidth
                 error={Boolean(touched.password && errors.password)}
                 sx={{
@@ -174,9 +191,10 @@ const JWTLogin = () => {
                     }
                 }}
             >
-                <InputLabel htmlFor="outlined-adornment-password-login">Select a Password</InputLabel>
+                <InputLabel id="demo-simple-select-label">Select a Password</InputLabel>
                 <Select
-                    labelId="select-password-label"
+                    fullWidth
+                    labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={password}
                     name="password"
@@ -224,6 +242,9 @@ const JWTLogin = () => {
                     Create Account
                 </Button>
             </Box>
+            <Dialog open={phoneDialog} onClose={() => setPhoneDialog(false)}>
+                <PhoneDialog phoneNumber={phoneNumberArr} setPhoneNumber={setPhoneNumberArr} setPhoneDialog={setPhoneDialog} />
+            </Dialog>
         </form>
     );
 };

@@ -64,9 +64,42 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
     //     '#EE4040',
     //     '#815CD1'
     // ];
+    // primary[200]
+    //primary[light]
+
+    //#eeedfd
+    //#b9b3f7
+    // const segColors = [
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8',
+    //     '#7267ef',
+    //     '#554ae8'
+    // ];
 
     const segColors = [
-        '#9fa8da',  
+        '#9fa8da',
         '#e8eaf6',
         '#9fa8da',
         '#e8eaf6',

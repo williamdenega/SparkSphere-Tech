@@ -101,7 +101,7 @@ const JWTLogin = ({ setSpins, spins }) => {
     return (
         <form noValidate onSubmit={handleSubmit}>
             <FormControl fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
-                <InputLabel htmlFor="outlined-adornment-email-login">Press the Icon to Enter UserName -&gt;</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-email-login">Press Icon to Enter UserName -&gt;</InputLabel>
 
                 <OutlinedInput
                     id="outlined-adornment-email-login"
@@ -129,7 +129,7 @@ const JWTLogin = ({ setSpins, spins }) => {
             </FormControl>
 
             <FormControl fullWidth error={Boolean(touched.password && errors.password)} sx={{ ...theme.typography.customInput }}>
-                <InputLabel htmlFor="outlined-adornment-password-login">Press the Lock to Enter Password -&gt;</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-password-login">Press Lock to Enter Password -&gt;</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-password-login"
                     type="password"
