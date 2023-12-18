@@ -1,19 +1,25 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import {
     Box,
     Button,
     FormControl,
     FormHelperText,
-    Grid,
+    // Grid,
     IconButton,
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    Typography,
+    // Typography,
     MenuItem,
     Select,
-    Dialog
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    DialogContentText
+    // Typography,
+    // Link
 } from '@mui/material';
 
 import { useTheme } from '@mui/material/styles';
@@ -30,19 +36,27 @@ const JWTLogin = () => {
     const [phoneNumberArr, setPhoneNumberArr] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [phoneDialog, setPhoneDialog] = useState(false);
+    const [userDialog, setUserDialog] = useState(false);
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [touched, setTouched] = useState({ username: false, password: false, phoneNumber: false });
     const [errors, setErrors] = useState({ phoneNumber: '', username: '', password: '', login: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const handleBlur = () => {
-        // Validation logic can be added here if needed
+        // console.log('PLEASE TELL THIS THIS WORKS!!!!!!');
+        if (!name) {
+            return;
+        }
+        setErrors({ username: 'UserName alreadt exits.' });
     };
 
     useEffect(() => {
         setPhoneNumber(phoneNumberArr.join(''));
     }, [phoneNumberArr]);
 
+    useEffect(() => {
+        setPhoneNumber('');
+    }, []);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setErrors({ username: '', password: '', login: '' });
@@ -83,10 +97,10 @@ const JWTLogin = () => {
             console.error(err);
             setErrors({ login: ` ${err.message}`, password: '', phoneNumber: '', username: '' });
             //setName('');
+            setPhoneNumberArr([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             setPassword('');
             setName('');
             setPhoneNumber('');
-            setPhoneNumberArr([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             //setSpins(10);
         } finally {
             setIsSubmitting(false);
@@ -98,7 +112,6 @@ const JWTLogin = () => {
 
     const handlePhoneDialog = () => {
         setPhoneDialog(true);
-        console.log(phoneDialog);
     };
 
     const formattedNumber = (num) => {
@@ -113,10 +126,9 @@ const JWTLogin = () => {
     return (
         <form noValidate onSubmit={handleSubmit}>
             <FormControl fullWidth error={Boolean(touched.phoneNumber && errors.phoneNumber)} sx={{ ...theme.typography.customInput }}>
-                <InputLabel htmlFor="outlined-adornment-email-login">Press Phone to enter Number -&gt;</InputLabel>
-
+                <InputLabel htmlFor="outlined-adornment-phoneNumber-login">Press Phone to enter Number -&gt;</InputLabel>
                 <OutlinedInput
-                    id="outlined-adornment-email-login"
+                    id="outlined-adornment-phoneNumber-login"
                     type="tel"
                     value={formattedNumber(phoneNumber)}
                     name="phoneNumber"
@@ -153,7 +165,17 @@ const JWTLogin = () => {
                     endIcon={<PersonIcon />}
                     endAdornment={<PersonIcon />}
                 />
-                {touched.username && errors.username && <FormHelperText error>{errors.username}</FormHelperText>}
+                {touched.username && errors.username && (
+                    <>
+                        <FormHelperText error>{errors.username}</FormHelperText>
+                        <FormHelperText error>
+                            Want to steal the username?
+                            <Button size="small" color="error" onClick={() => setUserDialog(true)}>
+                                $4.99
+                            </Button>
+                        </FormHelperText>
+                    </>
+                )}
             </FormControl>
             <FormControl
                 fullWidth
@@ -214,14 +236,14 @@ const JWTLogin = () => {
                 )}
             </FormControl>
 
-            <Grid container alignItems="center" justifyContent="space-between">
+            {/* <Grid container alignItems="center" justifyContent="space-between">
                 <Grid item></Grid>
                 <Grid item>
                     <Typography variant="subtitle1" component={Link} to="/forgot" color="secondary" sx={{ textDecoration: 'none' }}>
                         Forgot Password?
                     </Typography>
                 </Grid>
-            </Grid>
+            </Grid> */}
 
             {errors.submit && (
                 <Box sx={{ mt: 3 }}>
@@ -244,6 +266,20 @@ const JWTLogin = () => {
             </Box>
             <Dialog open={phoneDialog} onClose={() => setPhoneDialog(false)}>
                 <PhoneDialog phoneNumber={phoneNumberArr} setPhoneNumber={setPhoneNumberArr} setPhoneDialog={setPhoneDialog} />
+            </Dialog>
+            <Dialog open={userDialog} onClose={() => setUserDialog(false)}>
+                <DialogTitle>Steal Username {name}?</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>For just $4.99, you can steal the username you&apos;ve entered!</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setUserDialog(false)} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={() => setUserDialog(false)} color="primary" autoFocus>
+                        Pay $4.99
+                    </Button>
+                </DialogActions>
             </Dialog>
         </form>
     );

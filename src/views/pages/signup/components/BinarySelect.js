@@ -55,6 +55,7 @@ const BinarySelect = ({ setPhoneNumber, activeStep, phoneNumber }) => {
                 <FormGroup row>
                     {[8, 4, 2, 1].map((value) => (
                         <FormControlLabel
+                            sx={{ margin: '20px' }}
                             key={value}
                             control={
                                 <Checkbox
@@ -64,8 +65,6 @@ const BinarySelect = ({ setPhoneNumber, activeStep, phoneNumber }) => {
                                     checkedIcon={<RadioButtonCheckedRoundedIcon />}
                                 />
                             }
-                            label={value.toString()}
-                            labelPlacement="bottom"
                         />
                     ))}
                 </FormGroup>

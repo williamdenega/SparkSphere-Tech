@@ -125,7 +125,7 @@ const AuthForgotPassword = () => {
                             <Typography variant="h2">Success! </Typography>
                         </DialogTitle>
                         <DialogContent sx={{ textAlign: 'center' }}>
-                            <Typography variant="h4"> Check your phone within the next 3-7 days for a reset password link.</Typography>
+                            <Typography variant="h4"> Check your phone within the next 3-7 days for a password reset link.</Typography>
                             <Typography variant="h3" mt={2}>
                                 Need it sooner?
                             </Typography>

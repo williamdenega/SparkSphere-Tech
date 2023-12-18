@@ -21,10 +21,10 @@ const PhoneDialog = ({ phoneNumber, setPhoneNumber, setPhoneDialog }) => {
         setActiveStep((prev) => prev - 1);
     };
 
-    const handleReset = () => {
-        setActiveStep(0);
-        setPhoneNumber(phoneNumber);
-    };
+    // const handleReset = () => {
+    //     setActiveStep(0);
+    //     setPhoneNumber(phoneNumber);
+    // };
 
     return (
         <>
@@ -63,21 +63,13 @@ const PhoneDialog = ({ phoneNumber, setPhoneNumber, setPhoneDialog }) => {
                         </React.Fragment>
                     ))}
                 </Box>
-                {activeStep == steps.length ? (
-                    <>
-                        <Typography>All steps competed</Typography>
-                        <Button onClick={handleReset}>Reset</Button>
-                    </>
-                ) : (
-                    <>
-                        <BinarySelect
-                            setPhoneNumber={setPhoneNumber}
-                            digit={phoneNumber[activeStep]}
-                            activeStep={activeStep}
-                            phoneNumber={phoneNumber}
-                        />
-                    </>
-                )}
+
+                <BinarySelect
+                    setPhoneNumber={setPhoneNumber}
+                    digit={phoneNumber[activeStep]}
+                    activeStep={activeStep}
+                    phoneNumber={phoneNumber}
+                />
             </DialogContent>
             <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center', spacing: { gridSpacing } }}>
                 <Button size="large" variant="contained" fullWidth disabled={activeStep == 0} onClick={handleBack}>
