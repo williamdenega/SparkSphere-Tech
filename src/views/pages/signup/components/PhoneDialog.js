@@ -28,13 +28,15 @@ const PhoneDialog = ({ phoneNumber, setPhoneNumber, setPhoneDialog }) => {
 
     return (
         <>
-            <DialogTitle style={{ textAlign: 'center' }}>ENTER YOUR PHONE NUMBER USING BINARY</DialogTitle>
+            <DialogTitle style={{ textAlign: 'center' }} m={2}>
+                ENTER YOUR PHONE NUMBER USING BINARY
+            </DialogTitle>
             <DialogContent>
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} m={5}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} m={3}>
                     {phoneNumber.map((digit, index) => (
                         <React.Fragment key={index}>
                             {index === 0 && (
-                                <Typography variant="h2" component="span">
+                                <Typography variant="h3" component="span">
                                     (
                                 </Typography>
                             )}
@@ -49,12 +51,12 @@ const PhoneDialog = ({ phoneNumber, setPhoneNumber, setPhoneDialog }) => {
                                 {digit}
                             </Typography>
                             {index === 2 && (
-                                <Typography variant="h2" component="span">
+                                <Typography variant="h3" component="span">
                                     ) -&nbsp;
                                 </Typography>
                             )}
                             {index === 5 && (
-                                <Typography variant="h2" component="span">
+                                <Typography variant="h3" component="span">
                                     -&nbsp;
                                 </Typography>
                             )}
