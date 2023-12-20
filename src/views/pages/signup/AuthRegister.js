@@ -9,6 +9,7 @@ import {
     IconButton,
     InputAdornment,
     InputLabel,
+    // NativeSelect,
     OutlinedInput,
     // Typography,
     MenuItem,
@@ -43,18 +44,11 @@ const JWTLogin = () => {
     const [touched, setTouched] = useState({ username: false, password: false, phoneNumber: false });
     const [errors, setErrors] = useState({ phoneNumber: '', username: '', password: '', login: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const handleBlur = () => {
-        // console.log('PLEASE TELL THIS THIS WORKS!!!!!!');
-        // if (!name) {
-        //     return;
-        // }
-        // setErrors({ username: 'UserName alreadt exits.' });
-    };
+    const handleBlur = () => {};
 
     useEffect(() => {
         // Check if all elements in phoneNumberArr are '0'
         const isAllZeros = phoneNumberArr.every((num) => num == '0');
-        console.log(isAllZeros);
         // Set phoneNumber to an empty string if all elements are '0', otherwise join the array
         if (!isAllZeros) {
             setPhoneNumber(phoneNumberArr.join(''));
@@ -180,7 +174,6 @@ const JWTLogin = () => {
                 />
                 {errors.phoneNumber && <FormHelperText error>{errors.phoneNumber}</FormHelperText>}
             </FormControl>
-
             <FormControl fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
                 <InputLabel htmlFor="outlined-adornment-email-login">Enter a Username</InputLabel>
 
@@ -231,7 +224,8 @@ const JWTLogin = () => {
                         }
                     },
                     '& > div > div > select': {
-                        padding: '20.5px 14px 11.5px !important',
+                        padding: '40.5px 14px 11.5px !important', // Adjust this padding to increase or decrease height
+                        height: '5px', // Add or adjust this line to explicitly set the height
                         border: '1px solid ' + theme.palette.grey[500],
                         borderRadius: '4px',
                         outline: 'none',
@@ -261,6 +255,15 @@ const JWTLogin = () => {
                     name="password"
                     label="password"
                     onChange={handleChange}
+                    MenuProps={{
+                        sx: {
+                            '& .MuiMenu-paper': {
+                                '& .MuiMenuItem-root': {
+                                    minWidth: '100%' // Set the minimum width of each menu item
+                                }
+                            }
+                        }
+                    }}
                 >
                     <MenuItem value="biggusdickusfan">BiggusDickusFan</MenuItem>
                     <MenuItem value="blessedarethecheesemakers">BlessedAreTheCheesemakers</MenuItem>
@@ -268,11 +271,6 @@ const JWTLogin = () => {
                     <MenuItem value="AlwaysLookOnTheBrightSide">AlwaysLookOnTheBrightSide</MenuItem>
                 </Select>
                 {touched.password && errors.password && <FormHelperText error>{errors.password}</FormHelperText>}
-                {/* {errors.login && (
-                    <FormHelperText mt={2} error>
-                        {errors.login}
-                    </FormHelperText>
-                )} */}
             </FormControl>
 
             {errors.login && (

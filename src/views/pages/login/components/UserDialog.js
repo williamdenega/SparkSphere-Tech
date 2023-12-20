@@ -14,12 +14,15 @@ export default function UserDialog({ setOpenDialog, setInput, input, title, open
     const inputRef = useRef(null);
     useEffect(() => {
         if (spinning) {
-            // inputRef.current.focus();
-            inputRef.current.select();
+            // console.log(inputRef.current);
+            inputRef.current.focus();
+            // inputRef.current.style.borderBottom = '2px solid blue';
+            // inputRef.current.select();
             return;
         }
         setTimeout(() => {
             inputRef.current.blur();
+            inputRef.current.style.borderBottom = 'inherit';
         }, 0);
     }, [spinning]);
 
