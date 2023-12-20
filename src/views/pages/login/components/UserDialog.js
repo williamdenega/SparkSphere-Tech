@@ -14,18 +14,18 @@ export default function UserDialog({ setOpenDialog, setInput, input, title, open
     const inputRef = useRef(null);
     useEffect(() => {
         if (spinning) {
-            // console.log(inputRef.current);
-            inputRef.current.focus();
-            // inputRef.current.style.borderBottom = '2px solid blue';
-            // inputRef.current.select();
-            return;
+            if (inputRef.current) {
+                const parent = inputRef.current.parentNode;
+                console.log(parent);
+                parent.style.borderBottom = '1px solid #3f51b5';
+            }
+        } else {
+            if (inputRef.current) {
+                const parent = inputRef.current.parentNode;
+                parent.style.borderBottom = 'inherit';
+            }
         }
-        setTimeout(() => {
-            inputRef.current.blur();
-            inputRef.current.style.borderBottom = 'inherit';
-        }, 0);
     }, [spinning]);
-
     const handleAnimate = () => {
         // Trigger animation when clicked is true
         setAnimate(true);
@@ -92,6 +92,12 @@ export default function UserDialog({ setOpenDialog, setInput, input, title, open
                                 )}
                             </InputAdornment>
                         )
+                    }}
+                    InputLabelProps={{
+                        style: {
+                            color: spinning ? '#3f51b5' : 'inherit', // Change 'red' to the color you want when spinning is true
+                            fontWeight: spinning ? 'bold' : 'inherit'
+                        }
                     }}
                     inputRef={inputRef}
                 />
