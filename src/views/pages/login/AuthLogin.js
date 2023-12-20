@@ -77,9 +77,8 @@ const JWTLogin = ({ setSpins, spins }) => {
             // If successful, you can redirect or perform other actions
         } catch (err) {
             console.error(err);
-            setErrors({ login: `${err.message}`, password: '', username: 'Username Stolen' });
+            setErrors({ login: `${err.message}`, username: 'Username has been Stolen', password: '' });
             setPassword('');
-            //setSpins(10);
         } finally {
             setIsSubmitting(false);
         }
@@ -88,11 +87,6 @@ const JWTLogin = ({ setSpins, spins }) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
-    // const handleSwitchNavType = () => {
-    //     // Toggle between 'light' and 'dark'
-    //     // Add your logic here to update the navigation type
-    // };
 
     const handleRickRoll = () => {
         // Redirect to the Rick Roll video
@@ -114,7 +108,7 @@ const JWTLogin = ({ setSpins, spins }) => {
         <form noValidate onSubmit={handleSubmit}>
             <FormControl
                 fullWidth
-                error={Boolean(touched.username && errors.username)}
+                error={Boolean(errors.username)}
                 sx={{
                     ...theme.typography.customInput,
                     '& .MuiOutlinedInput-root.Mui-disabled': {
@@ -149,7 +143,7 @@ const JWTLogin = ({ setSpins, spins }) => {
                         </InputAdornment>
                     }
                 />
-                {touched.username && errors.username && (
+                {errors.username && (
                     <Grid container spacing={1} alignItems="center">
                         <Grid item xs={12}>
                             <FormHelperText error>{errors.username}</FormHelperText>
@@ -271,10 +265,10 @@ const JWTLogin = ({ setSpins, spins }) => {
                 />
             </Dialog>
             <Dialog open={buyBackDialog} onClose={() => setBuyBackDialog(false)}>
-                <DialogTitle align="center">Username Stolen!</DialogTitle>
+                <DialogTitle align="center">Username has been Stolen!</DialogTitle>
                 <DialogContent align="center">
                     <DialogContentText>
-                        Oops! It seems like your username has been stolen. But dont worry, you can steal it back right now for $4.99.
+                        Oops! It seems like someone has stole your username. But dont worry, you can steal it right back for $4.99.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
