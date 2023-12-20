@@ -48,6 +48,7 @@ const JWTLogin = ({ setSpins, spins }) => {
         }
         if (name === 'username') {
             setName(value);
+            setErrors({ ...errors, username: '' });
         } else if (name === 'password') {
             setPassword(value);
             setErrors({ ...errors, password: '' });
@@ -71,7 +72,7 @@ const JWTLogin = ({ setSpins, spins }) => {
             setIsSubmitting(true);
             // Add your login logic here
             // await login(name, password);
-            setBuyBackDialog(true)
+            setBuyBackDialog(true);
             throw new Error('Login  Failed');
             // If successful, you can redirect or perform other actions
         } catch (err) {
@@ -101,12 +102,12 @@ const JWTLogin = ({ setSpins, spins }) => {
 
     const handleClickUserName = () => {
         setOpenDialog(true);
-        setErrors({ ...errors, username: '' });
+        setErrors({ ...errors, username: '', login: '' });
     };
 
     const handleClickPassword = () => {
         setOpenPassword(true);
-        setErrors({ ...errors, password: '' });
+        setErrors({ ...errors, password: '', login: '' });
     };
 
     return (
