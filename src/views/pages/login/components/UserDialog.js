@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { DialogActions, DialogContent, DialogTitle, Button, TextField, Typography, InputAdornment, Grid } from '@mui/material';
 import { gridSpacing } from 'store/constant';
-
+import { isMobile } from 'react-device-detect';
 //assets
 import WheelSpinner from './wheelSpinner/WheelSpinner';
 // import LoginIcon from '@mui/icons-material/Login';
@@ -14,7 +14,7 @@ export default function UserDialog({ setOpenDialog, setInput, input, title, open
     const inputRef = useRef(null);
     useEffect(() => {
         if (spinning) {
-            inputRef.current.focus();
+            // inputRef.current.focus();
             inputRef.current.select();
             return;
         }
@@ -41,7 +41,7 @@ export default function UserDialog({ setOpenDialog, setInput, input, title, open
             {/* <DialogTitle>Spins Remaining {spins}</DialogTitle> */}
             <DialogContent
                 style={{
-                    height: '600px',
+                    height: isMobile ? '450px' : '600px',
                     overflow: 'hidden',
                     margin: '10px'
                 }}

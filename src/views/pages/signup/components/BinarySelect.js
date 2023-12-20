@@ -55,7 +55,7 @@ const BinarySelect = ({ setPhoneNumber, activeStep, phoneNumber }) => {
                 <FormGroup row>
                     {[8, 4, 2, 1].map((value) => (
                         <FormControlLabel
-                            sx={{ margin: '20px' }}
+                            sx={{ margin: '10px' }}
                             key={value}
                             control={
                                 <Checkbox

@@ -114,6 +114,7 @@ const JWTLogin = ({ setSpins, spins }) => {
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
+                                color="primary"
                                 aria-label="toggle username dialog"
                                 onClick={handleClickUserName}
                                 onMouseDown={handleMouseDownPassword}
@@ -141,6 +142,7 @@ const JWTLogin = ({ setSpins, spins }) => {
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
+                                color="primary"
                                 aria-label="toggle password dialog"
                                 onClick={handleClickPassword}
                                 onMouseDown={handleMouseDownPassword}

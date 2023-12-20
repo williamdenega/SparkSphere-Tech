@@ -81,7 +81,6 @@ const AuthForgotPassword = () => {
             />
             <Box sx={{ mt: 3 }}>
                 <DialogActions mb={2} style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
-                    {/* Reset button */}
                     <Button
                         size="large"
                         variant="outlined"
@@ -92,7 +91,6 @@ const AuthForgotPassword = () => {
                     >
                         RESET
                     </Button>
-                    {/* Play/Pause button */}
                     <Button
                         size="large"
                         onClick={handlePlayPauseClick}
@@ -104,7 +102,6 @@ const AuthForgotPassword = () => {
                 </DialogActions>
             </Box>
             <Box sx={{ mt: 3 }}>
-                {/* Continue button */}
                 <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
                     <Button
                         size="large"
@@ -118,7 +115,6 @@ const AuthForgotPassword = () => {
                 </DialogActions>
             </Box>
             <Dialog open={openDialog} onClose={handleCloseDialog} isTimerRunning={isTimerRunning}>
-                {/* Content of the dialog */}
                 {success ? (
                     <>
                         <DialogTitle sx={{ textAlign: 'center' }}>
@@ -143,7 +139,7 @@ const AuthForgotPassword = () => {
                     </>
                 ) : (
                     <>
-                        <DialogTitle>Is This Your Phone Number?</DialogTitle>
+                        <DialogTitle align="center">Is This Your Number?</DialogTitle>
                         <Box sx={{ textAlign: 'center', m: 3 }}>
                             <Typography variant="h2">{formattedNumber}</Typography>
                         </Box>

@@ -143,11 +143,11 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
             }, 200);
         }
     }, [spins, spinning]);
-    console.log();
+    // console.log();
     const startRotation = () => {
         const randomCount = Math.floor(Math.random() * (55 - 20 + 1)) + 20;
         setSpinning(true);
-        console.log('THERE ');
+        // console.log('THERE ');
         //console.log('TEST HERER');
         // setClicked(false);
         setTimeout(() => {
@@ -200,7 +200,7 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
         //console.log('clicked once');
         startRotation();
         handleAnimate();
-        console.log('HERE ');
+        // console.log('HERE ');
     };
 
     function handleBack() {
@@ -245,7 +245,6 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
         <>
             <div className="circleContainer">
                 <div className="overlappingDiv"></div>
-                <div className="colorChecker"></div>
                 <div className="circleDiv">
                     <ul className="circle">
                         {letters.map((letter, index) => (
@@ -299,7 +298,7 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
                         <Typography variant="h4">You have used all your spins.</Typography>
                     </DialogContentText> */}
                     <DialogContentText style={{ textAlign: 'center' }}>
-                        <Typography variant="h4">Get unlimited spins for only $1.99!</Typography>
+                        <Typography variant="h4">Get unlimited spins for only $4.99!</Typography>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center', spacing: { gridSpacing } }}>
@@ -307,7 +306,7 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
                         Cancel
                     </Button>
                     <Button onClick={handleRickRoll} color="primary">
-                        $1.99
+                        $4.99
                     </Button>
                 </DialogActions>
             </Dialog>

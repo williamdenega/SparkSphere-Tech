@@ -5,7 +5,7 @@ import {
     Button,
     FormControl,
     FormHelperText,
-    // Grid,
+    Grid,
     IconButton,
     InputAdornment,
     InputLabel,
@@ -17,7 +17,8 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    DialogContentText
+    DialogContentText,
+    Typography
     // Typography,
     // Link
 } from '@mui/material';
@@ -27,7 +28,7 @@ import { useTheme } from '@mui/material/styles';
 import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
 import PhoneIphoneOutlinedIcon from '@mui/icons-material/PhoneIphoneOutlined';
-
+import { isMobile } from 'react-device-detect';
 import PhoneDialog from './components/PhoneDialog';
 
 const JWTLogin = () => {
@@ -44,32 +45,44 @@ const JWTLogin = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const handleBlur = () => {
         // console.log('PLEASE TELL THIS THIS WORKS!!!!!!');
-        if (!name) {
-            return;
-        }
-        setErrors({ username: 'UserName alreadt exits.' });
+        // if (!name) {
+        //     return;
+        // }
+        // setErrors({ username: 'UserName alreadt exits.' });
     };
 
     useEffect(() => {
-        setPhoneNumber(phoneNumberArr.join(''));
+        // Check if all elements in phoneNumberArr are '0'
+        const isAllZeros = phoneNumberArr.every((num) => num == '0');
+        console.log(isAllZeros);
+        // Set phoneNumber to an empty string if all elements are '0', otherwise join the array
+        if (!isAllZeros) {
+            setPhoneNumber(phoneNumberArr.join(''));
+            setErrors({ ...errors, phoneNumber: '' });
+        } else {
+            setPhoneNumber('');
+        }
     }, [phoneNumberArr]);
 
-    useEffect(() => {
-        setPhoneNumber('');
-    }, []);
+    // useEffect(() => {
+    //     setPhoneNumber('');
+    // }, []);
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setErrors({ username: '', password: '', login: '' });
+        // setErrors({ username: '', password: '', login: '' });
         if (!touched[name]) {
             setTouched({ ...touched, [name]: true });
         }
         if (name === 'username') {
-            setName(value);
+            // Limit the username to a maximum of 15 characters
+            const limitedValue = value.slice(0, 20);
+            setName(limitedValue);
+            setErrors({ ...errors, username: '' });
         } else if (name === 'password') {
             setPassword(value);
             setErrors({ ...errors, password: '' });
         } else if (name === 'phoneNumber') {
-            setPhoneNumber(value);
+            setErrors({ ...errors, phoneNumber: '' });
         }
     };
 
@@ -91,16 +104,13 @@ const JWTLogin = () => {
             setIsSubmitting(true);
             // Add your login logic here
             // await login(name, password);
-            throw new Error('Failed to create Account (WEAK PASSWORD)');
+            throw new Error('Failed to create Account');
             // If successful, you can redirect or perform other actions
         } catch (err) {
             console.error(err);
-            setErrors({ login: ` ${err.message}`, password: '', phoneNumber: '', username: '' });
+            setErrors({ login: ` ${err.message}`, password: '', username: 'Username already exists' });
             //setName('');
-            setPhoneNumberArr([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             setPassword('');
-            setName('');
-            setPhoneNumber('');
             //setSpins(10);
         } finally {
             setIsSubmitting(false);
@@ -123,20 +133,40 @@ const JWTLogin = () => {
             .replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3')}`;
     };
 
+    const handleRickRoll = () => {
+        // Redirect to the Rick Roll video
+        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        setUserDialog(false);
+    };
+
     return (
         <form noValidate onSubmit={handleSubmit}>
-            <FormControl fullWidth error={Boolean(touched.phoneNumber && errors.phoneNumber)} sx={{ ...theme.typography.customInput }}>
-                <InputLabel htmlFor="outlined-adornment-phoneNumber-login">Press Phone to enter Number -&gt;</InputLabel>
+            <FormControl
+                fullWidth
+                error={Boolean(errors.phoneNumber)}
+                sx={{
+                    ...theme.typography.customInput,
+                    '& .MuiOutlinedInput-root.Mui-disabled': {
+                        '& fieldset': {
+                            borderColor: errors.phoneNumber ? 'red' : 'blakc' // Set the color you want for the error state
+                        }
+                    }
+                }}
+            >
+                <InputLabel htmlFor="outlined-adornment-phoneNumber-login">
+                    {isMobile ? `Tap Phone to enter Number ->` : 'Click Phone icon to enter Number ->'}
+                </InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-phoneNumber-login"
-                    type="tel"
                     value={formattedNumber(phoneNumber)}
+                    onChange={() => console.log('test')}
                     name="phoneNumber"
                     disabled
                     onBlur={handleBlur}
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
+                                color="primary"
                                 aria-label="toggle password dialog"
                                 onClick={handlePhoneDialog}
                                 onMouseDown={handleMouseDownPassword}
@@ -148,11 +178,11 @@ const JWTLogin = () => {
                         </InputAdornment>
                     }
                 />
-                {touched.phoneNumber && errors.phoneNumber && <FormHelperText error>{errors.phoneNumber}</FormHelperText>}
+                {errors.phoneNumber && <FormHelperText error>{errors.phoneNumber}</FormHelperText>}
             </FormControl>
 
             <FormControl fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
-                <InputLabel htmlFor="outlined-adornment-email-login">Enter UserName</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-email-login">Enter a Username</InputLabel>
 
                 <OutlinedInput
                     id="outlined-adornment-email-login"
@@ -165,16 +195,25 @@ const JWTLogin = () => {
                     endIcon={<PersonIcon />}
                     endAdornment={<PersonIcon />}
                 />
+
                 {touched.username && errors.username && (
-                    <>
-                        <FormHelperText error>{errors.username}</FormHelperText>
-                        <FormHelperText error>
-                            Want to steal the username?
-                            <Button size="small" color="error" onClick={() => setUserDialog(true)}>
-                                $4.99
-                            </Button>
-                        </FormHelperText>
-                    </>
+                    <Grid container spacing={1} alignItems="center">
+                        <Grid item xs={12}>
+                            <FormHelperText error>{errors.username}</FormHelperText>
+                        </Grid>
+                        {errors.login && (
+                            <>
+                                <Grid item>
+                                    <FormHelperText error>Want to steal the username?</FormHelperText>
+                                </Grid>
+                                <Grid item>
+                                    <Button size="small" color="error" ml={4} variant="outlined" onClick={() => setUserDialog(true)}>
+                                        $4.99
+                                    </Button>
+                                </Grid>
+                            </>
+                        )}
+                    </Grid>
                 )}
             </FormControl>
             <FormControl
@@ -229,26 +268,21 @@ const JWTLogin = () => {
                     <MenuItem value="AlwaysLookOnTheBrightSide">AlwaysLookOnTheBrightSide</MenuItem>
                 </Select>
                 {touched.password && errors.password && <FormHelperText error>{errors.password}</FormHelperText>}
-                {errors.login && (
+                {/* {errors.login && (
                     <FormHelperText mt={2} error>
                         {errors.login}
                     </FormHelperText>
-                )}
+                )} */}
             </FormControl>
 
-            {/* <Grid container alignItems="center" justifyContent="space-between">
-                <Grid item></Grid>
-                <Grid item>
-                    <Typography variant="subtitle1" component={Link} to="/forgot" color="secondary" sx={{ textDecoration: 'none' }}>
-                        Forgot Password?
-                    </Typography>
+            {errors.login && (
+                <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 0 }}>
+                    <Grid item xs={12}>
+                        <Typography variant="h5" color="error" align="center">
+                            {errors.login}
+                        </Typography>
+                    </Grid>
                 </Grid>
-            </Grid> */}
-
-            {errors.submit && (
-                <Box sx={{ mt: 3 }}>
-                    <FormHelperText error>{errors.submit}</FormHelperText>
-                </Box>
             )}
 
             <Box sx={{ mt: 2 }}>
@@ -268,16 +302,16 @@ const JWTLogin = () => {
                 <PhoneDialog phoneNumber={phoneNumberArr} setPhoneNumber={setPhoneNumberArr} setPhoneDialog={setPhoneDialog} />
             </Dialog>
             <Dialog open={userDialog} onClose={() => setUserDialog(false)}>
-                <DialogTitle>Steal Username {name}?</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>For just $4.99, you can steal the username you&apos;ve entered!</DialogContentText>
+                <DialogTitle align="center">Steal Username?</DialogTitle>
+                <DialogContent align="center">
+                    <DialogContentText>For just $4.99, you can steal the username &quot;{name}&quot;</DialogContentText>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setUserDialog(false)} color="primary">
+                <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
+                    <Button size="large" variant="outlined" onClick={() => setUserDialog(false)}>
                         Cancel
                     </Button>
-                    <Button onClick={() => setUserDialog(false)} color="primary" autoFocus>
-                        Pay $4.99
+                    <Button size="large" variant="contained" onClick={handleRickRoll}>
+                        $4.99
                     </Button>
                 </DialogActions>
             </Dialog>
