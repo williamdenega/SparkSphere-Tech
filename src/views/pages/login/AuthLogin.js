@@ -12,7 +12,11 @@ import {
     OutlinedInput,
     Typography,
     Dialog,
-    FormControlLabel
+    FormControlLabel,
+    DialogActions,
+    DialogTitle,
+    DialogContent,
+    DialogContentText
 } from '@mui/material';
 
 import { useTheme } from '@mui/material/styles';
@@ -28,6 +32,7 @@ const JWTLogin = ({ setSpins, spins }) => {
     const [password, setPassword] = useState('');
     const [touched, setTouched] = useState({ username: false, password: false });
     const [errors, setErrors] = useState({ username: '', password: '', login: '' });
+    const [buyBackDialog, setBuyBackDialog] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [openPassword, setOpenPassword] = useState(false);
@@ -66,12 +71,12 @@ const JWTLogin = ({ setSpins, spins }) => {
             setIsSubmitting(true);
             // Add your login logic here
             // await login(name, password);
-            throw new Error('User does not exist');
+            setBuyBackDialog(true)
+            throw new Error('Login  Failed');
             // If successful, you can redirect or perform other actions
         } catch (err) {
             console.error(err);
-            setErrors({ login: `Login failed: ${err.message}`, password: '' });
-            //setName('');
+            setErrors({ login: `${err.message}`, password: '', username: 'Username Stolen' });
             setPassword('');
             //setSpins(10);
         } finally {
@@ -88,6 +93,12 @@ const JWTLogin = ({ setSpins, spins }) => {
         // Add your logic here to update the navigation type
     };
 
+    const handleRickRoll = () => {
+        // Redirect to the Rick Roll video
+        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        setBuyBackDialog(false);
+    };
+
     const handleClickUserName = () => {
         setOpenDialog(true);
         setErrors({ ...errors, username: '' });
@@ -100,7 +111,18 @@ const JWTLogin = ({ setSpins, spins }) => {
 
     return (
         <form noValidate onSubmit={handleSubmit}>
-            <FormControl fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
+            <FormControl
+                fullWidth
+                error={Boolean(touched.username && errors.username)}
+                sx={{
+                    ...theme.typography.customInput,
+                    '& .MuiOutlinedInput-root.Mui-disabled': {
+                        '& fieldset': {
+                            borderColor: errors.username ? 'red' : 'inherit' // Set the color you want for the error state
+                        }
+                    }
+                }}
+            >
                 <InputLabel htmlFor="outlined-adornment-email-login">Press Icon to Enter UserName -&gt;</InputLabel>
 
                 <OutlinedInput
@@ -126,10 +148,40 @@ const JWTLogin = ({ setSpins, spins }) => {
                         </InputAdornment>
                     }
                 />
-                {touched.username && errors.username && <FormHelperText error>{errors.username}</FormHelperText>}
+                {touched.username && errors.username && (
+                    <Grid container spacing={1} alignItems="center">
+                        <Grid item xs={12}>
+                            <FormHelperText error>{errors.username}</FormHelperText>
+                        </Grid>
+                        {errors.login && (
+                            <>
+                                <Grid item>
+                                    <FormHelperText error>Steal the username back?</FormHelperText>
+                                </Grid>
+                                <Grid item>
+                                    <Button size="small" color="error" variant="outlined" onClick={() => setBuyBackDialog(true)}>
+                                        $4.99
+                                    </Button>
+                                </Grid>
+                            </>
+                        )}
+                    </Grid>
+                )}
+                {/* {touched.username && errors.username && <FormHelperText error>{errors.username}</FormHelperText>} */}
             </FormControl>
 
-            <FormControl fullWidth error={Boolean(touched.password && errors.password)} sx={{ ...theme.typography.customInput }}>
+            <FormControl
+                fullWidth
+                error={Boolean(touched.password && errors.password)}
+                sx={{
+                    ...theme.typography.customInput,
+                    '& .MuiOutlinedInput-root.Mui-disabled': {
+                        '& fieldset': {
+                            borderColor: errors.password ? 'red' : 'inherit' // Set the color you want for the error state
+                        }
+                    }
+                }}
+            >
                 <InputLabel htmlFor="outlined-adornment-password-login">Press Lock to Enter Password -&gt;</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-password-login"
@@ -157,11 +209,6 @@ const JWTLogin = ({ setSpins, spins }) => {
                     label="Password"
                 />
                 {touched.password && errors.password && <FormHelperText error>{errors.password}</FormHelperText>}
-                {errors.login && (
-                    <FormHelperText mt={2} error>
-                        {errors.login}
-                    </FormHelperText>
-                )}
             </FormControl>
 
             <Grid container alignItems="center" justifyContent="space-between">
@@ -175,10 +222,19 @@ const JWTLogin = ({ setSpins, spins }) => {
                 </Grid>
             </Grid>
 
-            {errors.submit && (
+            {/* {errors.submit && (
                 <Box sx={{ mt: 3 }}>
                     <FormHelperText error>{errors.submit}</FormHelperText>
                 </Box>
+            )}  */}
+            {errors.login && (
+                <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 0 }}>
+                    <Grid item xs={12}>
+                        <Typography variant="h5" color="error" align="center">
+                            {errors.login}
+                        </Typography>
+                    </Grid>
+                </Grid>
             )}
 
             <Box sx={{ mt: 2 }}>
@@ -215,6 +271,22 @@ const JWTLogin = ({ setSpins, spins }) => {
                     setSpins={setSpins}
                     spins={spins}
                 />
+            </Dialog>
+            <Dialog open={buyBackDialog} onClose={() => setBuyBackDialog(false)}>
+                <DialogTitle align="center">Username Stolen!</DialogTitle>
+                <DialogContent align="center">
+                    <DialogContentText>
+                        Oops! It seems like your username has been stolen. But dont worry, you can steal it back right now for $4.99.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
+                    <Button size="large" variant="outlined" onClick={() => setBuyBackDialog(false)}>
+                        Cancel
+                    </Button>
+                    <Button size="large" variant="contained" onClick={handleRickRoll}>
+                        $4.99
+                    </Button>
+                </DialogActions>
             </Dialog>
         </form>
     );

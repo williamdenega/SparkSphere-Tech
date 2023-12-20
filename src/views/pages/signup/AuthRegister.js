@@ -148,7 +148,7 @@ const JWTLogin = () => {
                     ...theme.typography.customInput,
                     '& .MuiOutlinedInput-root.Mui-disabled': {
                         '& fieldset': {
-                            borderColor: errors.phoneNumber ? 'red' : 'blakc' // Set the color you want for the error state
+                            borderColor: errors.phoneNumber ? 'red' : 'inherit' // Set the color you want for the error state
                         }
                     }
                 }}
