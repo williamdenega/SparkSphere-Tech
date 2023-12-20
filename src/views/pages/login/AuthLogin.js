@@ -12,7 +12,7 @@ import {
     OutlinedInput,
     Typography,
     Dialog,
-    FormControlLabel,
+    // FormControlLabel,
     DialogActions,
     DialogTitle,
     DialogContent,
@@ -24,7 +24,7 @@ import UserDialog from './components/UserDialog';
 import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
-import MaterialUISwitch from './components/MaterialUISwitch';
+// import MaterialUISwitch from './components/MaterialUISwitch';
 
 const JWTLogin = ({ setSpins, spins }) => {
     const theme = useTheme();
@@ -89,10 +89,10 @@ const JWTLogin = ({ setSpins, spins }) => {
         event.preventDefault();
     };
 
-    const handleSwitchNavType = () => {
-        // Toggle between 'light' and 'dark'
-        // Add your logic here to update the navigation type
-    };
+    // const handleSwitchNavType = () => {
+    //     // Toggle between 'light' and 'dark'
+    //     // Add your logic here to update the navigation type
+    // };
 
     const handleRickRoll = () => {
         // Redirect to the Rick Roll video
@@ -212,10 +212,7 @@ const JWTLogin = ({ setSpins, spins }) => {
                 {touched.password && errors.password && <FormHelperText error>{errors.password}</FormHelperText>}
             </FormControl>
 
-            <Grid container alignItems="center" justifyContent="space-between">
-                <Grid item>
-                    <FormControlLabel control={<MaterialUISwitch sx={{ m: 1 }} onChange={handleSwitchNavType} checked={false} />} />
-                </Grid>
+            <Grid container alignItems="flex-end" justifyContent="flex-end">
                 <Grid item>
                     <Typography variant="subtitle1" component={Link} to="/forgot" color="secondary" sx={{ textDecoration: 'none' }}>
                         Forgot Password?

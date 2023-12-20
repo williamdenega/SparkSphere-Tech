@@ -1,8 +1,9 @@
 // material-ui
 import { Link, Typography, Stack, Box } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+// import CoffeeIcon from '@mui/icons-material/Coffee';
 // import { IconBrandPaypalFilled } from '@tabler/icons-react';
-import InstagramIcon from '@mui/icons-material/Instagram';
+// import InstagramIcon from '@mui/icons-material/Instagram';
 // ==============================|| FOOTER - AUTHENTICATION 2 & 3 ||============================== //
 
 const AuthFooter = () => (
@@ -11,7 +12,7 @@ const AuthFooter = () => (
             <Typography
                 variant="subtitle2"
                 component={Link}
-                href="https://www.paypal.com/donate/?business=VADKX8EF29HA4&amount=1&no_recurring=1&item_name=Buy+me+a+Coffee?&currency_code=USD"
+                href="https://www.buymeacoffee.com/williamdend"
                 target="_blank"
                 underline="hover"
             >
@@ -27,15 +28,6 @@ const AuthFooter = () => (
                 underline="hover"
             >
                 <LinkedInIcon />
-            </Typography>
-            <Typography
-                variant="subtitle2"
-                component={Link}
-                href="https://www.instagram.com/williamdenega/"
-                target="_blank"
-                underline="hover"
-            >
-                <InstagramIcon />
             </Typography>
         </Box>
     </Stack>
