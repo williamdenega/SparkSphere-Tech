@@ -268,7 +268,7 @@ const JWTLogin = ({ setSpins, spins }) => {
                 <DialogTitle align="center">Username has been Stolen!</DialogTitle>
                 <DialogContent align="center">
                     <DialogContentText>
-                        Oops! It seems like someone has stole your username. But dont worry, you can steal it right back for $4.99.
+                        Oops! It seems like someone has stolen your username. But dont worry, you can steal it right back for $4.99.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>

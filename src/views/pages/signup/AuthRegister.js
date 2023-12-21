@@ -58,9 +58,26 @@ const JWTLogin = () => {
         }
     }, [phoneNumberArr]);
 
-    // useEffect(() => {
-    //     setPhoneNumber('');
-    // }, []);
+    useEffect(() => {
+        const input = document.getElementById('outlined-adornment-username-login');
+
+        const handleFocus = () => {
+            document
+                .querySelector('meta[name=viewport]')
+                .setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+        };
+        const handleBlur = () => {
+            document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1.0');
+        };
+
+        input.addEventListener('focus', handleFocus);
+        input.addEventListener('blur', handleBlur);
+
+        return () => {
+            input.removeEventListener('focus', handleFocus);
+            input.removeEventListener('blur', handleBlur);
+        };
+    }, []);
     const handleChange = (e) => {
         const { name, value } = e.target;
         // setErrors({ username: '', password: '', login: '' });
@@ -174,18 +191,27 @@ const JWTLogin = () => {
                 />
                 {errors.phoneNumber && <FormHelperText error>{errors.phoneNumber}</FormHelperText>}
             </FormControl>
-            <FormControl fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
-                <InputLabel htmlFor="outlined-adornment-email-login">Enter a Username</InputLabel>
+            <FormControl
+                fullWidth
+                error={Boolean(touched.username && errors.username)}
+                sx={{
+                    ...theme.typography.customInput,
+                    '& .MuiOutlinedInput-input': {
+                        fontSize: '16px' // Setting font size for the input element
+                    }
+                }}
+            >
+                <InputLabel htmlFor="outlined-adornment-username-login">Enter a Username</InputLabel>
 
                 <OutlinedInput
-                    id="outlined-adornment-email-login"
+                    id="outlined-adornment-username-login"
                     type="text"
                     inputRef={usernameInputRef}
                     value={name}
                     name="username"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    endIcon={<PersonIcon />}
+                    style={{ fontSize: '16px' }}
                     endAdornment={<PersonIcon />}
                 />
 
