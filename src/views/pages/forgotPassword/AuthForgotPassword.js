@@ -117,9 +117,9 @@ const AuthForgotPassword = () => {
             <Dialog open={openDialog} onClose={handleCloseDialog} isTimerRunning={isTimerRunning}>
                 {success ? (
                     <>
-                        <DialogTitle sx={{ textAlign: 'center' }}>
-                            <Typography variant="h2">Success! </Typography>
-                        </DialogTitle>
+                        <Typography align="center" variant="h2">
+                            Success!
+                        </Typography>
                         <DialogContent sx={{ textAlign: 'center' }}>
                             <Typography variant="h4"> Check your phone within the next 3-7 days for a password reset link.</Typography>
                             <Typography variant="h3" mt={2}>

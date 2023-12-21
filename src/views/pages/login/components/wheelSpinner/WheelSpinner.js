@@ -222,7 +222,7 @@ export default function RealWheel({ setInput, input, spinning, setSpinning, open
             element.style.transform = `rotate(${totalRotation}deg)`;
             element.style.transition = 'transform .4s ease';
         } else {
-            console.error('Element with class "circle" not found.');
+            // console.error('Element with class "circle" not found.');
             totalRotation += 180 / 13;
             return;
         }

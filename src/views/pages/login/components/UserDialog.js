@@ -16,7 +16,7 @@ export default function UserDialog({ setOpenDialog, setInput, input, title, open
         if (spinning) {
             if (inputRef.current) {
                 const parent = inputRef.current.parentNode;
-                console.log(parent);
+                // console.log(parent);
                 parent.style.borderBottom = '1px solid #3f51b5';
             }
         } else {

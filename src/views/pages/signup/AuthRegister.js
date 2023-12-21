@@ -27,7 +27,7 @@ import {
 import { useTheme } from '@mui/material/styles';
 // import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
-import LoginIcon from '@mui/icons-material/Login';
+// import LoginIcon from '@mui/icons-material/Login';
 import PhoneIphoneOutlinedIcon from '@mui/icons-material/PhoneIphoneOutlined';
 import { isMobile } from 'react-device-detect';
 import PhoneDialog from './components/PhoneDialog';
@@ -284,15 +284,7 @@ const JWTLogin = () => {
             )}
 
             <Box sx={{ mt: 2 }}>
-                <Button
-                    color="secondary"
-                    disabled={isSubmitting}
-                    fullWidth
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                    endIcon={<LoginIcon />}
-                >
+                <Button color="secondary" disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained">
                     Create Account
                 </Button>
             </Box>
